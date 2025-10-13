@@ -1,13 +1,31 @@
-// App.js
 import React from 'react';
-import ExampleCounter from './components/ExampleCounter';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
+
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const user = useSelector((state) => state.auth.user);
+
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Redux Counter Example</h1>
-      <ExampleCounter />
-    </div>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={user ? <Navigate to="/dashboard" /> : <Login />}
+        />
+        <Route
+          path="/dashboard"
+          element={user ? <Dashboard /> : <Navigate to="/" />}
+        />
+      </Routes>
+    </Router>
   );
 }
 
