@@ -1,70 +1,161 @@
-# Getting Started with Create React App
+# 🧠 Talent Onboarding Management System (Sample Project)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a full-stack demo for managing customers, products, stores, and sales records.  
+It is designed as a professional example of full-stack CRUD development using modern JavaScript technologies.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## ⚙️ Tech Stack
+**Backend:** Node.js + Express + Sequelize + SQLite  
+**Frontend:** React (under `/src`)  
+**API Testing:** Postman  
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Getting Started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 1️⃣ Clone the Project
+```bash
+git clone <your-repo-url>
+cd SAMPLE-REACT
+```
 
-### `npm test`
+### 2️⃣ Install Dependencies
+```bash
+cd backend
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 3️⃣ Start the Backend Server
+```bash
+node server.js
+```
+Then open **http://localhost:5000** in your browser.
 
-### `npm run build`
+You should see:
+```json
+[]
+```
+when visiting endpoints like `/api/customers`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🧪 API Testing (Postman)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+All API endpoints can be tested using the provided Postman collection.
 
-### `npm run eject`
+### Steps:
+1. Open **Postman**
+2. Click **Import**
+3. Select:
+   ```
+   postman/Talent_Onboarding_API.postman_collection.json
+   ```
+4. Start your backend server (`node server.js`)
+5. You can now test CRUD requests for:
+   - ✅ Customers
+   - ✅ Products
+   - ✅ Stores
+   - ✅ Sales
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Example:
+#### Create Customer (POST)
+**URL:** `http://localhost:5000/api/customers`  
+**Body (JSON):**
+```json
+{
+  "name": "Alice",
+  "address": "Queen Street"
+}
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Create Sale (POST)
+**URL:** `http://localhost:5000/api/sales`  
+**Body (JSON):**
+```json
+{
+  "productId": 1,
+  "customerId": 1,
+  "storeId": 1,
+  "dateSold": "2025-10-24"
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🧰 Database Info
 
-## Learn More
+- Database file: `backend/database/talent_onboarding.db`
+- Automatically created when the backend runs.
+- To view or modify data, you can use:
+  - **DB Browser for SQLite**
+  - **SQLite VS Code Extension**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📂 Project Structure
 
-### Code Splitting
+```
+SAMPLE-REACT/
+│
+├── backend/
+│   ├── database/
+│   │   └── db.js
+│   ├── models/
+│   │   ├── Customer.js
+│   │   ├── Product.js
+│   │   ├── Store.js
+│   │   └── Sales.js
+│   ├── routes/
+│   │   ├── customerRoutes.js
+│   │   ├── productRoutes.js
+│   │   ├── storeRoutes.js
+│   │   └── salesRoutes.js
+│   └── server.js
+│
+├── postman/
+│   └── Talent_Onboarding_API.postman_collection.json
+│
+├── src/
+│   ├── components/
+│   ├── pages/
+│   └── App.js
+│
+└── README.md
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## 🧱 API Overview
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+| Resource | Method | Endpoint | Description |
+|-----------|---------|-----------|-------------|
+| Customer | GET | `/api/customers` | Get all customers |
+| Customer | POST | `/api/customers` | Add new customer |
+| Customer | PUT | `/api/customers/:id` | Update a customer |
+| Customer | DELETE | `/api/customers/:id` | Delete a customer |
+| Product | GET | `/api/products` | Get all products |
+| Product | POST | `/api/products` | Add new product |
+| Store | GET | `/api/stores` | Get all stores |
+| Sale | POST | `/api/sales` | Add new sale record |
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 💡 Notes
 
-### Advanced Configuration
+- Ensure **Node.js v18+** is installed.
+- The database automatically syncs when the server starts.
+- You can easily connect this backend to a React frontend or deploy it to services like **Render**, **Railway**, or **Vercel**.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 👤 Author
+**Edward Li**  
+Master of Information Technology, University of Waikato  
+📍 Based in Auckland, New Zealand  
+📅 Project Date: October 2025  
+📁 Version: 1.0.0
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+✨ *“Build efficiently, test intelligently, and grow continuously.”*
