@@ -14,7 +14,7 @@ const CustomerPage = () => {
 
   const fetchCustomers = async () => {
     try {
-      const res = await api.get("/customers");
+      const res = await api.get("/Customers");
       setCustomers(res.data);
     } catch (err) {
       console.error("Failed to fetch customers:", err);
@@ -25,7 +25,11 @@ const CustomerPage = () => {
   const openModal = (customer = null) => {
     if (customer) {
       setEditMode(true);
-      setFormData(customer);
+      setFormData({
+      id: customer.id || customer.Id, // 确保有 id
+      name: customer.name || customer.Name || "",
+      address: customer.address || customer.Address || "",
+    });
     } else {
       setEditMode(false);
       setFormData({ id: null, name: "", address: "" });
@@ -38,15 +42,12 @@ const CustomerPage = () => {
     e.preventDefault();
     try {
       if (editMode) {
-        await api.put(`/customers/${formData.id}`, {
-          name: formData.name,
-          address: formData.address,
-        });
+        // ✅ 编辑模式：完整提交 formData（包含 id）
+        await api.put(`/Customers/${formData.id}`, formData);
       } else {
-        await api.post("/customers", {
-          name: formData.name,
-          address: formData.address,
-        });
+        // ✅ 新建模式：去掉 id 字段再提交
+        const { id, ...newData } = formData;
+        await api.post("/Customers", newData);
       }
       setIsModalOpen(false);
       fetchCustomers();
@@ -59,7 +60,7 @@ const CustomerPage = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this customer?")) return;
     try {
-      await api.delete(`/customers/${id}`);
+      await api.delete(`/Customers/${id}`);
       fetchCustomers();
     } catch (err) {
       console.error("Failed to delete customer:", err);
